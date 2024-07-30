@@ -14,6 +14,7 @@ public enum UserErrorCodeEnum implements IErrorCode {
     USER_NAME_EXIST_ERROR("A0111", "用户名已存在"),
     USER_NAME_SENSITIVE_ERROR("A0112", "用户名包含敏感词"),
     USER_NAME_SPECIAL_CHARACTER_ERROR("A0113", "用户名包含特殊字符"),
+    USER_NAME_NULL_ERROR("A0114", "用户名不能为空"),
     PASSWORD_VERIFY_ERROR("A0120", "密码校验失败"),
     PASSWORD_SHORT_ERROR("A0121", "密码长度不够"),
     PHONE_VERIFY_ERROR("A0151", "手机格式校验失败"),
