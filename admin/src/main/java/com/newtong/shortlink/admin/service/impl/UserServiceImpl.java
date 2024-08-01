@@ -64,6 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
                     throw new ServiceException(UserErrorCodeEnum.USER_REGISTER_ERROR);
                 }
                 userRegisterCachePenetrationBloomFilter.add(requestParam.getUsername());
+                return;
             }
             throw new ClientException(UserErrorCodeEnum.USER_NAME_EXIST_ERROR);
         }
