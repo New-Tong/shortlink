@@ -19,6 +19,7 @@ import com.newtong.shortlink.admin.dto.resp.UserRespDTO;
 import com.newtong.shortlink.admin.service.UserService;
 import com.newtong.shortlink.admin.dao.mapper.UserDOMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -34,6 +35,7 @@ import java.util.*;
  * @createDate 2024-07-29 17:43:17
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
         implements UserService {
