@@ -3,6 +3,7 @@ package com.newtong.shortlink.admin.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.newtong.shortlink.admin.common.constant.RedisCacheConstant;
@@ -25,10 +26,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author hp
@@ -127,5 +125,14 @@ public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
         } else {
             throw new ClientException(UserErrorCodeEnum.USER_LOGIN_NULL_ERROR);
         }
+    }
+
+    @Override
+    public void delete(String username) {
+        LambdaUpdateWrapper<UserDO> updateWrapper = Wrappers.lambdaUpdate(UserDO.class)
+                .eq(UserDO::getUsername, username)
+                .set(UserDO::getDeletionTime, System.currentTimeMillis());
+        baseMapper.update(baseMapper.selectOne(updateWrapper), updateWrapper);
+        baseMapper.delete(updateWrapper);
     }
 }

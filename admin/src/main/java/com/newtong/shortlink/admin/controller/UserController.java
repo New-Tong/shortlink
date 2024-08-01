@@ -109,4 +109,11 @@ public class UserController {
         userService.logout(username, token);
         return Results.success();
     }
+
+    @DeleteMapping("/deleteUser")
+    public Result<Void> delete(@RequestParam("username") String username, @RequestParam("token") String token) {
+        userService.logout(username, token);
+        userService.delete(username);
+        return Results.success();
+    }
 }

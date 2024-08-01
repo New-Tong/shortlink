@@ -48,4 +48,6 @@ public interface UserService extends IService<UserDO> {
      * @Description 退出登录
      */
     void logout(String username, String token);
+
+    void delete(String username);
 }
