@@ -2,7 +2,10 @@ package com.newtong.shortlink.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.newtong.shortlink.admin.dao.entity.UserDO;
+import com.newtong.shortlink.admin.dto.req.UserLoginReqDTO;
 import com.newtong.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.newtong.shortlink.admin.dto.req.UserUpdateReqDTO;
+import com.newtong.shortlink.admin.dto.resp.UserLoginRespDTO;
 import com.newtong.shortlink.admin.dto.resp.UserRespDTO;
 
 /**
@@ -31,4 +34,17 @@ public interface UserService extends IService<UserDO> {
      * @Description 注册
      */
     void register(UserRegisterReqDTO requestParam);
+
+    /**
+     * @Author NewTong
+     * @Date 9:59 2024/8/1
+     * @Param [requestParam]
+     * @return void
+     * @Description 根据用户名修改用户信息
+     */
+    void update(UserUpdateReqDTO requestParam);
+
+    UserLoginRespDTO login(UserLoginReqDTO requestParam);
+
+    Boolean checkLogin(String username, String token);
 }

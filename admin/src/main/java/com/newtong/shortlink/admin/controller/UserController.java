@@ -3,11 +3,15 @@ package com.newtong.shortlink.admin.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.newtong.shortlink.admin.common.convention.result.Result;
 import com.newtong.shortlink.admin.common.convention.result.Results;
+import com.newtong.shortlink.admin.dto.req.UserLoginReqDTO;
 import com.newtong.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.newtong.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.newtong.shortlink.admin.dto.resp.UserActualRespDTO;
+import com.newtong.shortlink.admin.dto.resp.UserLoginRespDTO;
 import com.newtong.shortlink.admin.dto.resp.UserRespDTO;
 import com.newtong.shortlink.admin.service.UserService;
 import jakarta.websocket.server.PathParam;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,5 +66,31 @@ public class UserController {
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam) {
         userService.register(requestParam);
         return Results.success();
+    }
+
+    /**
+     * @Author NewTong
+     * @Date 9:59 2024/8/1
+     * @Description 更新用户信息
+     */
+    @PutMapping
+    public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam) {
+        userService.update(requestParam);
+        return Results.success();
+    }
+
+    /**
+     * @Author NewTong
+     * @Date 10:44 2024/8/1
+     * @Description 登录
+     */
+    @PostMapping("/login")
+    public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
+        return Results.success(userService.login(requestParam));
+    }
+
+    @GetMapping("/check-login")
+    public Result<Boolean> checkLogin(@RequestParam("username") String username, @RequestParam("token") String token) {
+        return Results.success(userService.checkLogin(username, token));
     }
 }
