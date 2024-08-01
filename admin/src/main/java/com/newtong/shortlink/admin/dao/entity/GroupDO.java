@@ -1,15 +1,11 @@
 package com.newtong.shortlink.admin.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.newtong.shortlink.admin.common.database.BaseDO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author NewTong

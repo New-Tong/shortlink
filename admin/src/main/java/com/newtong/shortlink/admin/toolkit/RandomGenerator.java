@@ -7,7 +7,6 @@ package com.newtong.shortlink.admin.toolkit;
  */
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * @Author NewTong
