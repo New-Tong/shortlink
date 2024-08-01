@@ -2,6 +2,9 @@ package com.newtong.shortlink.admin.service;
 
 import com.newtong.shortlink.admin.dao.entity.GroupDO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.newtong.shortlink.admin.dto.resp.GroupRespDO;
+
+import java.util.List;
 
 /**
 * @author hp
@@ -11,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface GroupDOService extends IService<GroupDO> {
 
     void saveGroup(String groupName);
+
+    List<GroupRespDO> getAllGroup();
 }
