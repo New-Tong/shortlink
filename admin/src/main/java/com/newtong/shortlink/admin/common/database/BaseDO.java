@@ -3,6 +3,7 @@ package com.newtong.shortlink.admin.common.database;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @Date 2024/8/1 -20:10
  * @Description
  */
+@Data
 public class BaseDO implements Serializable{
     /**
      * 创建时间
