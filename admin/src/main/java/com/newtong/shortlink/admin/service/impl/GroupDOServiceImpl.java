@@ -1,22 +1,45 @@
 package com.newtong.shortlink.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.newtong.shortlink.admin.dao.entity.GroupDO;
 import com.newtong.shortlink.admin.service.GroupDOService;
 import com.newtong.shortlink.admin.dao.mapper.GroupDOMapper;
+import com.newtong.shortlink.admin.toolkit.RandomGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
-* @author hp
-* @description 针对表【t_group】的数据库操作Service实现
-* @createDate 2024-08-01 17:41:08
-*/
+ * @author hp
+ * @description 针对表【t_group】的数据库操作Service实现
+ * @createDate 2024-08-01 17:41:08
+ */
 @Slf4j
 @Service
 public class GroupDOServiceImpl extends ServiceImpl<GroupDOMapper, GroupDO>
-    implements GroupDOService{
+        implements GroupDOService {
 
+    @Override
+    public void saveGroup(String groupName) {
+        String gid;
+        do {
+            gid = RandomGenerator.generateGroupId();
+        } while (hasGid(gid));
+        GroupDO groupDO = GroupDO.builder()
+                .gid(gid)
+                .groupName(groupName)
+                .build();
+        baseMapper.insert(groupDO);
+    }
+
+    private boolean hasGid(String gid) {
+        LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
+                .eq(GroupDO::getGid, gid)
+                // TODO 添加用户名
+                .eq(GroupDO::getUsername, null);
+        return baseMapper.selectOne(queryWrapper) != null;
+    }
 }
 
 

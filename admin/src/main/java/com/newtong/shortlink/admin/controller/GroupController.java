@@ -1,9 +1,11 @@
 package com.newtong.shortlink.admin.controller;
 
+import com.newtong.shortlink.admin.common.convention.result.Result;
+import com.newtong.shortlink.admin.common.convention.result.Results;
+import com.newtong.shortlink.admin.dto.req.GroupSaveReqDTO;
 import com.newtong.shortlink.admin.service.GroupDOService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author NewTong
@@ -15,5 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/short-link/admin/v1/group")
 public class GroupController {
     private final GroupDOService groupDOService;
+
+    @PostMapping("/create")
+    public Result<Void> createGroup(@RequestBody GroupSaveReqDTO requestParam) {
+        groupDOService.saveGroup(requestParam.getGroupName());
+        return Results.success();
+    }
 
 }

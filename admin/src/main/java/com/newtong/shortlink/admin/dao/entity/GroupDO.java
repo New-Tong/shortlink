@@ -1,8 +1,13 @@
 package com.newtong.shortlink.admin.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.newtong.shortlink.admin.common.database.BaseDO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,13 +18,15 @@ import java.util.Date;
  */
 @Data
 @TableName("t_group")
-public class GroupDO implements Serializable {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GroupDO extends BaseDO {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键，唯一id
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -30,29 +37,11 @@ public class GroupDO implements Serializable {
     /**
      * 分组名称
      */
-    private String name;
+    private String groupName;
 
     /**
      * 创建分组用户名
      */
     private String username;
 
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT, value = "create_time")
-    private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE, value = "update_time")
-    private Date updateTime;
-
-    /**
-     * 删除标识 0：未删除 1：已删除
-     */
-    @TableLogic
-    @TableField(fill = FieldFill.INSERT, value = "del_flag")
-    private int delFlag;
 }
