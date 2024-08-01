@@ -119,4 +119,13 @@ public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
         Object redisToken = redisTemplate.opsForHash().get(token_prefix + username, token);
         return redisToken != null;
     }
+
+    @Override
+    public void logout(String username, String token) {
+        if (checkLogin(username, token)) {
+            redisTemplate.delete(token_prefix + username);
+        } else {
+            throw new ClientException(UserErrorCodeEnum.USER_LOGIN_NULL_ERROR);
+        }
+    }
 }

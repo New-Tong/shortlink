@@ -15,36 +15,37 @@ import com.newtong.shortlink.admin.dto.resp.UserRespDTO;
 */
 public interface UserService extends IService<UserDO> {
     /**
-     * @Param [username]
-     * @return com.newtong.shortlink.admin.dto.resp.UserRespDTO
      * @Description  根据用户名获取用户信息
      */
     UserRespDTO getUserByUsername(String username);
 
     /**
-     * @Param [username]
-     * @return boolean
      * @Description 判断用户名是否已存在
      */
     boolean hasUsername(String username);
 
     /**
-     * @Param [requestParam]
-     * @return void
      * @Description 注册
      */
     void register(UserRegisterReqDTO requestParam);
 
     /**
-     * @Author NewTong
-     * @Date 9:59 2024/8/1
-     * @Param [requestParam]
-     * @return void
      * @Description 根据用户名修改用户信息
      */
     void update(UserUpdateReqDTO requestParam);
 
+    /**
+     * @Description 用户登录
+     */
     UserLoginRespDTO login(UserLoginReqDTO requestParam);
 
+    /**
+     * @Description 验证用户登录
+     */
     Boolean checkLogin(String username, String token);
+
+    /**
+     * @Description 退出登录
+     */
+    void logout(String username, String token);
 }

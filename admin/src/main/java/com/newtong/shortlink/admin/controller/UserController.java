@@ -89,8 +89,24 @@ public class UserController {
         return Results.success(userService.login(requestParam));
     }
 
+    /**
+     * @Author NewTong
+     * @Date 17:02 2024/8/1
+     * @Description 检查用户是否登录
+     */
     @GetMapping("/check-login")
     public Result<Boolean> checkLogin(@RequestParam("username") String username, @RequestParam("token") String token) {
         return Results.success(userService.checkLogin(username, token));
+    }
+
+    /**
+     * @Author NewTong
+     * @Date 17:03 2024/8/1
+     * @Description 用户退出登录
+     */
+    @DeleteMapping("/logout")
+    public Result<Void> logout(@RequestParam("username") String username, @RequestParam("token") String token) {
+        userService.logout(username, token);
+        return Results.success();
     }
 }
