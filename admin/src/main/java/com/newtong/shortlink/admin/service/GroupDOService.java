@@ -2,6 +2,7 @@ package com.newtong.shortlink.admin.service;
 
 import com.newtong.shortlink.admin.dao.entity.GroupDO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.newtong.shortlink.admin.dto.req.GroupOrderReqDTO;
 import com.newtong.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.newtong.shortlink.admin.dto.resp.GroupRespDO;
 
@@ -35,5 +36,17 @@ public interface GroupDOService extends IService<GroupDO> {
      */
     void updateGroup(GroupUpdateReqDTO requestParam);
 
+    /**
+     * @Author NewTong
+     * @Date 10:31 2024/8/2
+     * @Description 删除短链接分组
+     */
     void deleteGroup(String gid);
+
+    /**
+     * @Author NewTong
+     * @Date 10:31 2024/8/2
+     * @Description 短链接分组排序
+     */
+    void sortGroup(List<GroupOrderReqDTO> requestParam);
 }

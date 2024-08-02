@@ -2,6 +2,7 @@ package com.newtong.shortlink.admin.controller;
 
 import com.newtong.shortlink.admin.common.convention.result.Result;
 import com.newtong.shortlink.admin.common.convention.result.Results;
+import com.newtong.shortlink.admin.dto.req.GroupOrderReqDTO;
 import com.newtong.shortlink.admin.dto.req.GroupSaveReqDTO;
 import com.newtong.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.newtong.shortlink.admin.dto.resp.GroupRespDO;
@@ -63,6 +64,12 @@ public class GroupController {
     @DeleteMapping("/delete")
     public Result<Void> deleteGroup(@RequestParam("gid") String gid) {
         groupDOService.deleteGroup(gid);
+        return Results.success();
+    }
+
+    @PostMapping("sort")
+    public Result<Void> sortGroup(@RequestBody List<GroupOrderReqDTO> requestParam) {
+        groupDOService.sortGroup(requestParam);
         return Results.success();
     }
 

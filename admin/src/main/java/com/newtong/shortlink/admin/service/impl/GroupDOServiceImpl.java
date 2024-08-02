@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.newtong.shortlink.admin.common.biz.user.UserContext;
 import com.newtong.shortlink.admin.dao.entity.GroupDO;
+import com.newtong.shortlink.admin.dto.req.GroupOrderReqDTO;
 import com.newtong.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.newtong.shortlink.admin.dto.resp.GroupRespDO;
 import com.newtong.shortlink.admin.service.GroupDOService;
@@ -69,6 +70,19 @@ public class GroupDOServiceImpl extends ServiceImpl<GroupDOMapper, GroupDO>
                         .eq(GroupDO::getGid, gid)
                         .eq(GroupDO::getUsername, UserContext.getUsername())
         );
+    }
+
+    @Override
+    public void sortGroup(List<GroupOrderReqDTO> requestParam) {
+        requestParam.forEach(item -> {
+            GroupDO groupDO = GroupDO.builder()
+                    .sortOrder(item.getSortOrder())
+                    .build();
+            LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                    .eq(GroupDO::getGid, item.getGid())
+                    .eq(GroupDO::getUsername, UserContext.getUsername());
+            baseMapper.update(groupDO, updateWrapper);
+        });
     }
 
     private boolean hasGid(String gid) {
