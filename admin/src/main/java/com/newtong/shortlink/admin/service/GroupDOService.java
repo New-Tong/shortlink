@@ -34,4 +34,6 @@ public interface GroupDOService extends IService<GroupDO> {
      * @Description 修改短链接分组
      */
     void updateGroup(GroupUpdateReqDTO requestParam);
+
+    void deleteGroup(String gid);
 }

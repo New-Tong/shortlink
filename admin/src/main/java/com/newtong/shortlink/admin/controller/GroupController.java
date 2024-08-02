@@ -55,4 +55,15 @@ public class GroupController {
         return Results.success();
     }
 
+    /**
+     * @Author NewTong
+     * @Date 10:23 2024/8/2
+     * @Description 删除短链接分组
+     */
+    @DeleteMapping("/delete")
+    public Result<Void> deleteGroup(@RequestParam("gid") String gid) {
+        groupDOService.deleteGroup(gid);
+        return Results.success();
+    }
+
 }
