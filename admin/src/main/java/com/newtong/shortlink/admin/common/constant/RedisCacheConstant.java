@@ -14,6 +14,6 @@ public class RedisCacheConstant {
 
     public static final Integer USER_LOGIN_TOKEN_CACHE_EXPIRE_TIME = 30;
 
-    public static final TimeUnit USER_LOGIN_TOKEN_CACHE_TIME_UNIT = TimeUnit.MINUTES;
+    public static final TimeUnit USER_LOGIN_TOKEN_CACHE_TIME_UNIT = TimeUnit.DAYS;
 
 }

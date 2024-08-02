@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.newtong.shortlink.admin.common.biz.user.UserContext;
 import com.newtong.shortlink.admin.dao.entity.GroupDO;
 import com.newtong.shortlink.admin.dto.resp.GroupRespDO;
 import com.newtong.shortlink.admin.service.GroupDOService;
@@ -33,6 +34,7 @@ public class GroupDOServiceImpl extends ServiceImpl<GroupDOMapper, GroupDO>
         GroupDO groupDO = GroupDO.builder()
                 .gid(gid)
                 .sortOrder(0)
+                .username(UserContext.getUsername())
                 .groupName(groupName)
                 .build();
         baseMapper.insert(groupDO);
@@ -41,8 +43,7 @@ public class GroupDOServiceImpl extends ServiceImpl<GroupDOMapper, GroupDO>
     @Override
     public List<GroupRespDO> getAllGroup() {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
-                // TODO 获取用户名
-                .isNull(GroupDO::getUsername)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
                 .orderByDesc(List.of(GroupDO::getSortOrder, GroupDO::getUpdateTime));
         List<GroupDO> groupDOList = baseMapper.selectList(queryWrapper);
         return BeanUtil.copyToList(groupDOList, GroupRespDO.class);
@@ -51,8 +52,7 @@ public class GroupDOServiceImpl extends ServiceImpl<GroupDOMapper, GroupDO>
     private boolean hasGid(String gid) {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
                 .eq(GroupDO::getGid, gid)
-                // TODO 添加用户名
-                .eq(GroupDO::getUsername, null);
+                .eq(GroupDO::getUsername, UserContext.getUsername());
         return baseMapper.selectOne(queryWrapper) != null;
     }
 }

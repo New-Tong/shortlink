@@ -23,6 +23,7 @@ public enum UserErrorCodeEnum implements IErrorCode {
     USER_LOGIN_USERNAME_NOT_EXIST_ERROR("A0125", "用户不存在"),
     USER_LOGIN_EXIST_ERROR("A0126", "用户已经登录"),
     USER_LOGIN_NULL_ERROR("A0127", "用户未登录"),
+    USER_TOKEN_ERROR("A0128", "用户Token验证错误"),
     PASSWORD_VERIFY_ERROR("A0220", "密码校验失败"),
     PASSWORD_SHORT_ERROR("A0221", "密码长度不够"),
     PHONE_VERIFY_ERROR("A0351", "手机格式校验失败"),

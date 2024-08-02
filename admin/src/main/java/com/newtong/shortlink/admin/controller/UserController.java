@@ -71,7 +71,7 @@ public class UserController {
      * @Date 9:59 2024/8/1
      * @Description 更新用户信息
      */
-    @PutMapping
+    @PutMapping("/update")
     public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam) {
         userService.update(requestParam);
         return Results.success();
