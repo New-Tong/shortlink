@@ -2,8 +2,8 @@ package com.newtong.shortlink.admin.controller;
 
 import com.newtong.shortlink.admin.common.convention.result.Result;
 import com.newtong.shortlink.admin.common.convention.result.Results;
-import com.newtong.shortlink.admin.dao.entity.GroupDO;
 import com.newtong.shortlink.admin.dto.req.GroupSaveReqDTO;
+import com.newtong.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.newtong.shortlink.admin.dto.resp.GroupRespDO;
 import com.newtong.shortlink.admin.service.GroupDOService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +42,17 @@ public class GroupController {
     public Result<List<GroupRespDO>> getAllGroup() {
         List<GroupRespDO> groupRespDOList = groupDOService.getAllGroup();
         return Results.success(groupRespDOList);
+    }
+
+    /**
+     * @Author NewTong
+     * @Date 10:05 2024/8/2
+     * @Description 修改短链接分组名
+     */
+    @PutMapping("/update")
+    public Result<Void> updateGroup(@RequestBody GroupUpdateReqDTO requestParam) {
+        groupDOService.updateGroup(requestParam);
+        return Results.success();
     }
 
 }
