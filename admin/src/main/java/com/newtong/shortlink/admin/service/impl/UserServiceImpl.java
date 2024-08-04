@@ -44,7 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
     private final RedissonClient redissonClient;
     private final StringRedisTemplate redisTemplate;
     private static final String token_prefix = RedisCacheConstant.USER_LOGIN_TOKEN_CACHE_KEY_PREFIX;
-    
+
 
     @Override
     public UserRespDTO getUserByUsername(String username) {
@@ -80,6 +80,8 @@ public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
                 return;
             }
             throw new ClientException(UserErrorCodeEnum.USER_NAME_EXIST_ERROR);
+        } catch (Exception e) {
+            throw new ServiceException(e.toString());
         } finally {
             lock.unlock();
         }
@@ -87,14 +89,12 @@ public class UserServiceImpl extends ServiceImpl<UserDOMapper, UserDO>
 
     @Override
     public void update(UserUpdateReqDTO requestParam) {
-        // TODO 验证当前用户是否为登录的用户
         baseMapper.update(BeanUtil.toBean(requestParam, UserDO.class),
                 Wrappers.lambdaUpdate(UserDO.class).eq(UserDO::getUsername, requestParam.getUsername()));
     }
 
     @Override
     public UserLoginRespDTO login(UserLoginReqDTO requestParam) {
-        // TODO 验证用户名密码
         LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
                 .eq(UserDO::getUsername, requestParam.getUsername())
                 .eq(UserDO::getPassword, requestParam.getPassword());
