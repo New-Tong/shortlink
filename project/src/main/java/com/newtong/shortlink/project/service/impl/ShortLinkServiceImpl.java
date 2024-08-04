@@ -1,6 +1,7 @@
 package com.newtong.shortlink.project.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.text.StrBuilder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -50,7 +51,7 @@ public class ShortLinkServiceImpl extends ServiceImpl<LinkDOMapper, LinkDO>
                 .gid(requestParam.getGid())
                 .createdType(requestParam.getCreatedType())
                 .validDateType(requestParam.getValidDateType())
-                .validDate(requestParam.getValidDate())
+                .validDate(DateUtil.offsetDay(DateUtil.date(), requestParam.getValidDate()))
                 .description(requestParam.getDescription())
                 .build();
         try {
