@@ -2,8 +2,6 @@ package com.newtong.shortlink.project.dto.req;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @author NewTong
  * @Date 2024/8/3 -13:51
@@ -40,7 +38,7 @@ public class ShortLinkCreateReqDTO {
     /**
      * 有效期
      */
-    private Date validDate;
+    private Integer validDate;
 
     /**
      * 描述
