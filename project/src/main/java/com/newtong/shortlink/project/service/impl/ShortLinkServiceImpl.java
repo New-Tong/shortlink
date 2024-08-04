@@ -1,14 +1,18 @@
 package com.newtong.shortlink.project.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.StrBuilder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.newtong.shortlink.project.common.convention.exception.ServiceException;
 import com.newtong.shortlink.project.dao.entity.LinkDO;
 import com.newtong.shortlink.project.dao.mapper.LinkDOMapper;
 import com.newtong.shortlink.project.dto.req.ShortLinkCreateReqDTO;
+import com.newtong.shortlink.project.dto.req.ShortLinkPageReqDTO;
 import com.newtong.shortlink.project.dto.resp.ShortLinkCreateRespDTO;
+import com.newtong.shortlink.project.dto.resp.ShortLinkPageRespDTO;
 import com.newtong.shortlink.project.service.ShortLinkService;
 import com.newtong.shortlink.project.toolkit.HashUtil;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +71,17 @@ public class ShortLinkServiceImpl extends ServiceImpl<LinkDOMapper, LinkDO>
                 .fullShortUrl(fullShortUrl)
                 .originUrl(requestParam.getOriginUrl())
                 .build();
+    }
+
+    @Override
+    public IPage<ShortLinkPageRespDTO> getShortLinkPage(ShortLinkPageReqDTO requestParam) {
+        LambdaQueryWrapper<LinkDO> queryWrapper = Wrappers.lambdaQuery(LinkDO.class)
+                .eq(LinkDO::getGid, requestParam.getGid())
+                .eq(LinkDO::getEnableStatus, 0)
+                .eq(LinkDO::getDelFlag, 0)
+                .orderByDesc(LinkDO::getCreateTime);
+        IPage<LinkDO> linkDOIPage = baseMapper.selectPage(requestParam, queryWrapper);
+        return linkDOIPage.convert(item -> BeanUtil.toBean(item, ShortLinkPageRespDTO.class));
     }
 
     private String generateShortUri(ShortLinkCreateReqDTO requestParam) {

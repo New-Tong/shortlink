@@ -1,9 +1,12 @@
 package com.newtong.shortlink.project.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.newtong.shortlink.project.dao.entity.LinkDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.newtong.shortlink.project.dto.req.ShortLinkCreateReqDTO;
+import com.newtong.shortlink.project.dto.req.ShortLinkPageReqDTO;
 import com.newtong.shortlink.project.dto.resp.ShortLinkCreateRespDTO;
+import com.newtong.shortlink.project.dto.resp.ShortLinkPageRespDTO;
 
 /**
 * @author NewTong
@@ -18,4 +21,6 @@ public interface ShortLinkService extends IService<LinkDO> {
      * @Description 创建短链接
      */
     ShortLinkCreateRespDTO createShortLink(ShortLinkCreateReqDTO requestParam);
+
+    IPage<ShortLinkPageRespDTO> getShortLinkPage(ShortLinkPageReqDTO requestParam);
 }

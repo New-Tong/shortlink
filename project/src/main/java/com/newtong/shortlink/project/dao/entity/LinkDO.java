@@ -84,4 +84,9 @@ public class LinkDO extends BaseDO {
      */
     private String description;
 
+    /**
+     * 网站标识
+     */
+    private String favicon;
+
 }
